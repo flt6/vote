@@ -45,28 +45,34 @@ python run.py
 1. 管理员密码通过环境变量`ADMIN_PASSWORD`设置，如未设置，使用`admin`
 
 2. 第一次使用，显示`未配置，请稍后`。进入http://<你的域名或localhost>/admin/后输入密码进入配置页
-![登录页](imgs/login.png)
+![登录页](https://oss.flt6.top/imgs/vote/login.png)
 
 3. 配置页分为接龙和投票。
 
 接龙模式：名单一行一个人名，按下回车后下方显示列表预览。（示意图人名由AI随机生成，如有冒犯请见谅）
-![配置接龙](imgs/config-1.png)
+![配置接龙](https://oss.flt6.top/imgs/vote/config-1.png)
 
 投票模式：选项一行一个，按下回车后右侧显示预览。
-![配置投票](imgs/config-2.png)
+![配置投票](https://oss.flt6.top/imgs/vote/config-2.png)
 
 4. 配置完成后，进入后台统计页面。直接访问域名显示前台。
 
 接龙模式，前台点击姓名即可接龙，上方搜索栏支持精确搜索、拼音搜索、首字母搜索
-![接龙前台](imgs/chain.png)
-![接龙前台确认](imgs/chain-confirm.png)
+![接龙前台](https://oss.flt6.top/imgs/vote/chain.png)
+![接龙前台确认](https://oss.flt6.top/imgs/vote/chain-confirm.png)
 
 后台显示已接龙和未接龙人数以及列表。点击未接龙列表人名，设为已接龙；点击已接龙列表人名，显示接龙时间和取消接龙按钮。
-![接龙后台](imgs/chain-dashboard.png)
+![接龙后台](https://oss.flt6.top/imgs/vote/chain-dashboard.png)
 
 投票模式，前台点击选项即可投票
-![投票前台](imgs/vote.png)
-![投票前台确认](imgs/vote-confirm.png)
+![投票前台](https://oss.flt6.top/imgs/vote/vote.png)
+![投票前台确认](https://oss.flt6.top/imgs/vote/vote-confirm.png)
 
 后台显示各选项投票人数和百分比
-![投票后台](imgs/vote-dashboard.png)
+![投票后台](https://oss.flt6.top/imgs/vote/vote-dashboard.png)
+
+
+## 开源
+
+Github：https://github.com/flt6/vote/
+协议：Apache-2.0 license
