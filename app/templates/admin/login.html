@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}管理员登录{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>管理员登录</h2>
+    <input type="password" id="password" placeholder="请输入密码">
+    <button onclick="login()">登录</button>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/admin/login.js') }}"></script>
+{% endblock %}

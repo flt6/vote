@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}投票选项{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vote.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="vote-container">
+    <h2 id="voteTitle"></h2>
+    <div class="options-list" id="optionsList">
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/vote.js') }}"></script>
+{% endblock %}

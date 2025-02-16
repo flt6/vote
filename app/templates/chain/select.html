@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}接龙{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chain.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1>接龙</h1>
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="搜索姓名...">
+</div>
+<div class="name-grid" id="nameGrid">
+    <!-- 动态生成的名字格子 -->
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/chain.js') }}"></script>
+{% endblock %}

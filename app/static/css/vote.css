@@ -1,0 +1,153 @@
+.vote-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.option-item {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.option-item:hover {
+    background-color: #e9ecef;
+}
+
+.vote-count {
+    float: right;
+    color: #6c757d;
+}
+
+.confirm-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    color: #333;
+    transform: translateX(-2px);
+}
+
+.back-button::before {
+    content: "←";
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.confirm-container h2 {
+    text-align: center;
+    color: #333;
+    margin: 2rem 0;
+    font-weight: 500;
+    line-height: 1.5;
+}
+.confirm-container h1 {
+    text-align: center;
+    color: #333;
+    margin: 2rem 0;
+    font-weight: 600;
+    line-height: 0.2;
+}
+
+#voteTitle {
+    color: #1976D2;
+    font-weight: 600;
+}
+
+#selectedOption {
+    color: #2196F3;
+    font-weight: 600;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.button-group button {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.button-group button:first-child {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.button-group button:first-child:hover {
+    background-color: #e0e0e0;
+}
+
+.button-group button:last-child {
+    background-color: #2196F3;
+    color: white;
+}
+
+.button-group button:last-child:hover {
+    background-color: #1976D2;
+}
+
+.button-group button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+}
+
+.toast.success {
+    background-color: #4CAF50;
+}
+
+.toast.error {
+    background-color: #f44336;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}

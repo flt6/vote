@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}数据统计{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div id="chainStats" class="stats-section card">
+        <h2 class="section-title">接龙统计</h2>
+        <div class="stats-summary">
+            <div class="stat-item">
+                <span class="stat-label">已接龙</span>
+                <span class="stat-value" id="chainCount">0</span>
+                <span class="stat-unit">人</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">未接龙</span>
+                <span class="stat-value" id="unchainCount">0</span>
+                <span class="stat-unit">人</span>
+            </div>
+        </div>
+        
+        <div class="lists-container">
+            <div class="list-section">
+                <h3 class="list-title">已接龙列表</h3>
+                <div class="name-grid" id="chainedGrid"></div>
+            </div>
+            <div class="list-section">
+                <h3 class="list-title">未接龙列表</h3>
+                <div class="name-grid" id="unchainedGrid"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="voteStats" class="stats-section card">
+        <h2 class="section-title">投票统计</h2>
+        <!-- <div class="sort-buttons">
+            <button class="btn btn-primary" onclick="sortByOriginal()">原始排序</button>
+            <button class="btn btn-primary" onclick="sortByCount()">数量排序</button>
+        </div> -->
+        <div class="table-responsive">
+            <table id="voteTable" class="stats-table">
+                <thead>
+                    <tr>
+                        <th>选项</th>
+                        <th>人数</th>
+                        <th>占比</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div style="text-align:center">
+        <button class="reset-button danger-button" onclick="resetSystem()">
+            <i class="fas fa-redo"></i> 重置系统
+        </button>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/dashboard.css') }}">
+
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/admin/dashboard.js') }}"></script>
+{% endblock %}

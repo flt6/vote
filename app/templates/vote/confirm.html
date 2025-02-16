@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}确认投票{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vote.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="confirm-container">
+    <div class="back-button" onclick="history.back()">返回上一页</div>
+    <h1><span id="voteTitle"></span></h1>
+    <h2></span><br>您选择了<br><span id="selectedOption"></span></h2>
+    <div class="button-group">
+        <button onclick="history.back()">取消</button>
+        <button onclick="confirmVote()" id="confirmBtn">确认投票</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selectedOption = localStorage.getItem('selectedOption');
+    document.getElementById('selectedOption').textContent = selectedOption;
+    
+    const voteTitle = localStorage.getItem('voteTitle');
+    document.getElementById('voteTitle').textContent = voteTitle;
+});
+
+async function confirmVote() {
+    const confirmBtn = document.getElementById('confirmBtn');
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = '提交中...';
+    
+    const option = localStorage.getItem('selectedOption');
+    try {
+        const response = await fetch('/api/vote/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ option })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            showToast("投票成功！");
+            localStorage.removeItem('selectedOption');
+            localStorage.removeItem('voteTitle');
+            setTimeout(() => {
+                window.location.href = '/vote';
+            }, 1500);
+        } else {
+            showToast('投票失败：' + data.error, 'error');
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = '确认投票';
+        }
+    } catch (error) {
+        showToast('网络错误，请重试', 'error');
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = '确认投票';
+    }
+}
+
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+</script>
+{% endblock %}

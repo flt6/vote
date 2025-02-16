@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}确认接龙{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chain.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="confirm-container">
+    <div class="back-button" onclick="history.back()">返回上一页</div>
+    <h2>确认接龙信息</h2>
+    <div class="info-section">
+        <h2>姓名：<span id="selectedName"></span></h2>
+    </div>
+    <div class="button-group">
+        <button onclick="history.back()">取消</button>
+        <button onclick="confirmChain()" id="confirmBtn">确认提交</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selectedName = localStorage.getItem('selectedName');
+    document.getElementById('selectedName').textContent = selectedName;
+});
+
+async function confirmChain() {
+    const confirmBtn = document.getElementById('confirmBtn');
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = '提交中...';
+    
+    const name = localStorage.getItem('selectedName');
+    try {
+        const response = await fetch('/api/chain/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name })
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            showToast("提交成功！");
+            localStorage.removeItem('selectedName');
+            setTimeout(() => {
+                window.location.href = '/chain';
+            }, 1500);
+        } else {
+            showToast('提交失败：' + data.error, 'error');
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = '确认提交';
+        }
+    } catch (error) {
+        showToast('网络错误，请重试', 'error');
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = '确认提交';
+    }
+}
+
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+</script>
+{% endblock %}
