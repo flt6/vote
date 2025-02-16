@@ -71,8 +71,7 @@ python run.py
 ![投票后台](img/vote-dashboard.png)
 
 
-## 数据存储
+## 开源
 
-统使用JSON文件进行数据持久化存储，数据文件保存在`data`目录下：
-- vote.json: 投票数据
-- chain.json: 接龙数据
+Github：https://github.com/flt6/vote/
+协议：Apache-2.0 license
