@@ -1,18 +1,11 @@
 import json
-import os
+from pathlib import Path
 from typing import Dict, Any
 
-def load_json(filepath: str) -> Dict:
-    if not os.path.exists(filepath):
+def load_json(filepath: Path) -> Dict:
+    if not filepath.exists():
         return None
-    
-    try:
-        with open(filepath, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    except:
-        return None
+    return json.loads(filepath.read_text())
 
-def save_json(filepath: str, data: Any):
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    with open(filepath, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def save_json(filepath: Path, data: Any):
+    filepath.write_text(json.dumps(data, ensure_ascii=False, indent=2))

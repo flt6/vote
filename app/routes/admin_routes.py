@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response,redirect
-from app.models.chain import ChainModel
-from app.models.vote import VoteModel
+from app.models.chain import chain_model
+from app.models.vote import vote_model
+from app.models.status import status_model,Status
 from app.utils.session_manager import SessionManager
 from functools import wraps
 from .base import get_mode
@@ -8,8 +9,6 @@ import os
 
 bp = Blueprint('admin', __name__, url_prefix='/api/admin')
 
-chain_model = ChainModel()
-vote_model = VoteModel()
 session_manager = SessionManager()
 
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD",None)
@@ -54,24 +53,25 @@ def login():
 def config_chain():
     names = request.json.get('names', [])
     chain_model.set_names(names)
+    status_model.set(Status.CHAIN)
     return jsonify({'success': True})
 
 @bp.route('/config/vote', methods=['POST'])
 @login_required
 def config_vote():
-    data = request.json
+    data:dict = request.json
     vote_model.set_config(
         data.get('title', ''),
         data.get('options', []),
         data.get('show_count', False)
     )
+    status_model.set(Status.VOTE)
     return jsonify({'success': True})
 
 @bp.route('/reset', methods=['POST'])
 @login_required
 def reset_system():
-    if os.path.exists("data/chain.json"):
-        os.remove("data/chain.json")
-    if os.path.exists("data/vote.json"):
-        os.remove("data/vote.json")
+    vote_model.reset()
+    chain_model.reset()
+    status_model.set(Status.CONFIG)
     return jsonify({'success': True})

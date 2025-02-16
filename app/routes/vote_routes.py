@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify, request
-from app.models.vote import VoteModel
+from app.models.vote import vote_model
 
 bp = Blueprint('vote', __name__, url_prefix='/api/vote')
-vote_model = VoteModel()
 
 @bp.route('/options')
 def get_options():

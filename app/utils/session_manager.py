@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
+from .database import db
 import uuid
 
 class SessionManager:
     def __init__(self, expire_minutes=30):
         self.sessions = {}  # uuid -> (timestamp, is_admin)
+        #  db.get("sessions",{})
         self.expire_minutes = expire_minutes
 
     def create_session(self, is_admin=True):
